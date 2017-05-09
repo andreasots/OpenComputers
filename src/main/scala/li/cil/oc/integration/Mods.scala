@@ -25,6 +25,7 @@ object Mods {
   val Minecraft = new SimpleMod(IDs.Minecraft)
   val OpenComputers = new SimpleMod(IDs.OpenComputers)
   val TIS3D = new SimpleMod(IDs.TIS3D, version = "@[0.9,)")
+  val Forge = new SimpleMod(IDs.Forge, providesPower = true)
 
   // ----------------------------------------------------------------------- //
 
@@ -32,6 +33,7 @@ object Mods {
     integration.forestry.ModForestry,
     integration.tis3d.ModTIS3D,
     integration.minecraft.ModMinecraft,
+    integration.forge.ModForge,
 
     // We go late to ensure all other mod integration is done, e.g. to
     // allow properly checking if wireless redstone is present.
@@ -64,6 +66,7 @@ object Mods {
     final val Minecraft = "minecraft"
     final val OpenComputers = "opencomputers"
     final val TIS3D = "tis3d"
+    final val Forge = "forge"
   }
 
   // ----------------------------------------------------------------------- //
