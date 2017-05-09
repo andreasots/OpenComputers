@@ -91,22 +91,13 @@ object InventoryUtils {
   def insertIntoInventorySlot(stack: ItemStack, inventory: IItemHandler, slot: Int, limit: Int = 64, simulate: Boolean = false): Boolean =
     (!stack.isEmpty && limit > 0 && stack.getCount > 0) && {
       val amount = math.min(stack.getCount, limit)
-      if (simulate) {
-        val toInsert = stack.copy()
-        toInsert.setCount(amount)
-        inventory.insertItem(slot, toInsert, simulate) match {
-          case remaining: ItemStack => remaining.getCount < amount
-          case _ => true
-        }
-      } else {
-        val toInsert = stack.splitStack(amount)
-        inventory.insertItem(slot, toInsert, simulate) match {
-          case remaining: ItemStack =>
-            val result = remaining.getCount < amount
-            stack.grow(remaining.getCount)
-            result
-          case _ => true
-        }
+      val toInsert = stack.splitStack(amount)
+      inventory.insertItem(slot, toInsert, simulate) match {
+        case remaining: ItemStack =>
+          val result = remaining.getCount < amount
+          stack.grow(remaining.getCount)
+          result
+        case _ => true
       }
     }
 
